@@ -1,0 +1,13 @@
+---
+ 
+ - hosts: all
+   become: true
+   tasks:
+ 
+   - name: get model info
+     ansible.builtin.shell: cat /proc/cpuinfo | grep "Model" 
+     register: command_output
+
+   - name: Print to console
+     debug:
+       msg: "{{command_output.stdout}}"

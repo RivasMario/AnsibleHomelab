@@ -4,8 +4,12 @@
    become: true
    tasks:
  
-   - name: get model info
-     ansible.builtin.shell: cat /proc/cpuinfo | grep "Model" 
+   - name: get rpi model and memory information
+     tags: shellcmds
+     ansible.builtin.shell: |
+       cat /proc/cpuinfo | grep "Model"
+       free -h
+       df -h
      register: command_output
 
    - name: Print to console
